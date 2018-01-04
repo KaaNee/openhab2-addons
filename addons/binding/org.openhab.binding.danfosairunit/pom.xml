@@ -10,10 +10,10 @@
 		<version>2.2.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>org.openhab.binding.danfosairunit</artifactId>
+	<artifactId>org.openhab.binding.danfossairunit</artifactId>
 	<version>2.2.0-SNAPSHOT</version>
 
-	<name>DanfosAirUnit Binding</name>
+	<name>danfossairunit Binding</name>
 	<packaging>eclipse-plugin</packaging>
 
 </project>

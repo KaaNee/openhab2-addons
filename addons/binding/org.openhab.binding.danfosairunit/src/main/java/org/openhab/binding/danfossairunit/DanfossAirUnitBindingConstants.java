@@ -10,24 +10,24 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-package org.openhab.binding.danfosairunit;
+package org.openhab.binding.danfossairunit;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.smarthome.core.thing.ThingTypeUID;
 
 /**
- * The {@link DanfosAirUnitBindingConstants} class defines common constants, which are
+ * The {@link DanfossAirUnitBindingConstants} class defines common constants, which are
  * used across the whole binding.
  *
  * @author kaineuhaus - Initial contribution
  */
- @NonNullByDefault
-public class DanfosAirUnitBindingConstants {
+@NonNullByDefault
+public class DanfossAirUnitBindingConstants {
 
-    private static final String BINDING_ID = "danfosairunit";
+    private static final String BINDING_ID = "danfossairunit";
 
     // List of all Thing Type UIDs
-    public static final ThingTypeUID THING_TYPE_SAMPLE = new ThingTypeUID(BINDING_ID, "sample");
+    public static final ThingTypeUID THING_TYPE_AIRUNIT = new ThingTypeUID(BINDING_ID, "danfossairunit");
 
     // List of all Channel ids
     public static final String CHANNEL_1 = "channel1";

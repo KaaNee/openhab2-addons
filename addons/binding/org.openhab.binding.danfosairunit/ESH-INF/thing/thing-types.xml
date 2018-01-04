@@ -1,24 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<thing:thing-descriptions bindingId="danfosairunit"
+<thing:thing-descriptions bindingId="danfossairunit"
 						  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 						  xmlns:thing="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0"
 						  xsi:schemaLocation="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0 http://eclipse.org/smarthome/schemas/thing-description-1.0.0.xsd">
 
-	<!-- Sample Thing Type -->
-	<thing-type id="sample">
-		<label>DanfosAirUnit Binding Thing</label>
-		<description>Sample thing for DanfosAirUnit Binding</description>
+	<!-- Thing Type -->
+	<thing-type id="device">
+		<label>danfossairunit Binding Thing</label>
+		<description>Sample thing for danfossairunit Binding</description>
 
 		<channels>
-			<channel id="channel1" typeId="sample-channel"/>
+			<channel id="systemMode" typeId="systemMode"/>
+            <channel id="temperature1" typeId="temperature"/>
+            <channel id="temperature2" typeId="temperature"/>
+            <channel id="temperature3" typeId="temperature"/>
+            <channel id="temperature4" typeId="temperature"/>
+            <channel id="temperature5" typeId="temperature"/>
+            <channel id="humidity" typeId="humidity"/>
 		</channels>
-	</thing-type>
+		
+		<config-description uri="thing-type:danfossairunit:device">
+	        <parameter name="ipAddress" type="text">
+	            <context>network-address</context>
+	            <label>Network Address</label>
+	            <description>Network address of the DanfossAirUnit.</description>
+	            <required>true</required>
+	        </parameter>
+	        <parameter name="port" type="integer">
+	            <label>Network Port</label>
+	            <description>Network port of the danfossAirUnit.</description>
+	            <advanced>true</advanced>
+	            <default>30046</default>
+	        </parameter>
+			<parameter name="discoveryPort" type="integer">
+	            <label>Network Port for Discovery</label>
+	            <description>Network port for discovering.</description>
+	            <advanced>true</advanced>
+	            <default>30045</default>
+	        </parameter>
+        </config-description>
 
-	<!-- Sample Channel Type -->
-	<channel-type id="sample-channel">
-		<item-type>danfosairunitItem</item-type>
-		<label>DanfosAirUnit Binding Channel</label>
-		<description>Sample channel for DanfosAirUnit Binding</description>
+	</thing-type>
+	
+	<!-- 
+	<thing-type id="climate">
+       <label>danfossairunit Binding Thing</label>
+        <description>Sample thing for danfossairunit Binding</description>
+       <channels>
+           <channel typeId="temperature1" id="temperature"/>
+           <channel typeId="temperature2" id="temperature"/>
+           <channel typeId="temperature3" id="temperature"/>
+           <channel typeId="temperature4" id="temperature"/>
+           <channel typeId="temperature5" id="temperature"/>
+           <channel typeId="humidity" id="humidity"/>
+       </channels>
+    </thing-type>
+    -->
+
+	<!-- Channel Type -->
+	<channel-type id="systemMode">
+		<item-type>String</item-type>
+		<label>SystemMode</label>
+		<description>SystemModel channel for danfossairunit Binding</description>
 	</channel-type>
+	
+    <channel-type id="temperature">
+        <item-type>Number</item-type>
+        <label>Temperature</label>
+        <description>Temperature channel for danfossairunit Binding</description>
+        <category>Temperature</category>
+        <state readOnly="true"/>
+    </channel-type>
+	
+    <channel-type id="humidity">
+        <item-type>Number</item-type>
+        <label>Humidity</label>
+        <description>Humidity channel for danfossairunit Binding</description>
+        <category>Humidity</category>
+        <state readOnly="true"/>
+    </channel-type>
+	
 
 </thing:thing-descriptions>

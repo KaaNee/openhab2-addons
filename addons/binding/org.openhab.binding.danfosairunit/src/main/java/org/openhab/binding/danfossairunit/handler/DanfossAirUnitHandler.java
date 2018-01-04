@@ -10,32 +10,41 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-package org.openhab.binding.danfosairunit.handler;
+package org.openhab.binding.danfossairunit.handler;
 
-import static org.openhab.binding.danfosairunit.DanfosAirUnitBindingConstants.*;
+import static org.openhab.binding.danfossairunit.DanfossAirUnitBindingConstants.CHANNEL_1;
+
+import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.smarthome.core.thing.ChannelUID;
 import org.eclipse.smarthome.core.thing.Thing;
 import org.eclipse.smarthome.core.thing.ThingStatus;
+import org.eclipse.smarthome.core.thing.ThingStatusDetail;
 import org.eclipse.smarthome.core.thing.binding.BaseThingHandler;
 import org.eclipse.smarthome.core.types.Command;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import de.danfoss.airunit.model.AirUnit;
+import de.danfoss.airunit.service.AirUnitController;
+import de.danfoss.airunit.service.AirUnitControllerImpl;
 
 /**
- * The {@link DanfosAirUnitHandler} is responsible for handling commands, which are
+ * The {@link DanfossAirUnitHandler} is responsible for handling commands, which are
  * sent to one of the channels.
  *
  * @author kaineuhaus - Initial contribution
  */
- @NonNullByDefault
-public class DanfosAirUnitHandler extends BaseThingHandler {
+@NonNullByDefault
+public class DanfossAirUnitHandler extends BaseThingHandler {
 
-    private final Logger logger = LoggerFactory.getLogger(DanfosAirUnitHandler.class);
+    // private final Logger logger = LoggerFactory.getLogger(DanfossAirUnitHandler.class);
+    private final AirUnitController controller;
+    private AirUnit airUnit;
 
-    public DanfosAirUnitHandler(Thing thing) {
+    public DanfossAirUnitHandler(Thing thing) {
         super(thing);
+        controller = new AirUnitControllerImpl();
+        airUnit = controller.getCurrentUnit();
     }
 
     @Override
@@ -52,8 +61,17 @@ public class DanfosAirUnitHandler extends BaseThingHandler {
 
     @Override
     public void initialize() {
+        updateStatus(ThingStatus.INITIALIZING);
+
+        List<AirUnit> findUnits = controller.findUnits();
+        if (findUnits == null || findUnits.isEmpty()) {
+            updateStatus(ThingStatus.OFFLINE, ThingStatusDetail.NONE,
+                    "Could not find any AirUnit with broadcast-message.");
+            return;
+        }
         // TODO: Initialize the thing. If done set status to ONLINE to indicate proper working.
         // Long running initialization should be done asynchronously in background.
+        airUnit = findUnits.get(0);
         updateStatus(ThingStatus.ONLINE);
 
         // Note: When initialization can NOT be done set the status with more details for further
