@@ -6,8 +6,8 @@
 
 	<!-- Thing Type -->
 	<thing-type id="device">
-		<label>danfossairunit Binding Thing</label>
-		<description>Sample thing for danfossairunit Binding</description>
+		<label>Danfoss Airunit Device</label>
+		<description>Airunit-Controller for Danfoss</description>
 
 		<channels>
 			<channel id="systemMode" typeId="systemMode"/>
